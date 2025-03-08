@@ -37,9 +37,9 @@ public class AtlasPuntuaciones {
         int[][] puntajes = new int[numParticipantes][numRondas];
 
         for (int i = 0; i < numParticipantes; i++){
-            for (int j = 0; j < numRondas; j++){
-                System.out.print("Puntaje del jugador " + (i + 1) + " en la ronda " + (j + 1) + ": ");
-                puntajes[i][j] = escaner.nextInt();
+            for (int o = 0; o < numRondas; o++){
+                System.out.print("Puntaje del jugador " + (i + 1) + " en la ronda " + (o + 1) + ": ");
+                puntajes[i][o] = escaner.nextInt();
             }
         }
 
@@ -50,8 +50,8 @@ public class AtlasPuntuaciones {
     public int[] CalcularTotal(int[][] puntajes, int numRondas){
         int[] TotalPuntajes = new int[puntajes.length];
         for (int i = 0; i < puntajes.length; i++){
-            for (int j = 0; j < numRondas; j++){
-                TotalPuntajes[i] += puntajes[i][j];
+            for (int o = 0; o < numRondas; o++){
+                TotalPuntajes[i] += puntajes[i][o];
             }
         }
         return TotalPuntajes;
