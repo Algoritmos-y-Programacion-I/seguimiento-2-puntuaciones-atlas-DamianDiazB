@@ -43,25 +43,25 @@ public class AtlasPuntuaciones {
             }
         }
 
-        int[] totalPuntajes = calcularTotales(puntajes, numRondas);
-        mostrarResultados(totalPuntajes, numRondas);
+        int[] TotalPuntajes = CalcularTotal(puntajes, numRondas);
+        MostrarResultados(TotalPuntajes, numRondas);
     }
 
-    public int[] calcularTotales(int[][] puntajes, int numRondas){
-        int[] totalPuntajes = new int[puntajes.length];
+    public int[] CalcularTotal(int[][] puntajes, int numRondas){
+        int[] TotalPuntajes = new int[puntajes.length];
         for (int i = 0; i < puntajes.length; i++){
             for (int j = 0; j < numRondas; j++){
-                totalPuntajes[i] += puntajes[i][j];
+                TotalPuntajes[i] += puntajes[i][j];
             }
         }
-        return totalPuntajes;
+        return TotalPuntajes;
     }
 
-    private void mostrarResultados(int[] totalPuntajes, int numRondas){
+    private void MostrarResultados(int[] TotalPuntajes, int numRondas){
         System.out.println("Resultados finales:");
-        for (int i = 0; i < totalPuntajes.length; i++){
-            double promedio = (double) totalPuntajes[i] / numRondas;
-            System.out.println("El jugador numero " + (i + 1) + " tiene un total de " + totalPuntajes[i] + " puntos y un promedio de " + promedio);
+        for (int i = 0; i < TotalPuntajes.length; i++){
+            double promedio = (double) TotalPuntajes[i] / numRondas;
+            System.out.println("El jugador numero " + (i + 1) + " tiene un total de " + TotalPuntajes[i] + " puntos y un promedio de " + promedio);
         }
     }
 
