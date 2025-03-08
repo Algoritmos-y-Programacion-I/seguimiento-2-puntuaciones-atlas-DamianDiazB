@@ -1,67 +1,72 @@
-// Análisis (completar)
-// Descripción del programa:
-// Entradas:
-// Salidas:
-// Ejemplo:
+// Analisis (completar)
+// Descripcion del programa: El programa nos pide tomar los datos para un juego de maximo 10 jugadore con un maximo de 5 rondas, este tiene que sumar los puntos 
+// y luego promediarlos
+// Entradas: Numero de jugadores, numero de rondas, puntaje de cada jugador en cada ronda
+// Salidas: Suma total de puntajes por jugador, promedio por jugador
 
 package ui;
 import java.util.Scanner;
 
 public class AtlasPuntuaciones {
 
-	private Scanner escaner;
+    private Scanner escaner;
 
-	private AtlasPuntuaciones() {
-		escaner = new Scanner(System.in);
-	}
-	
-	public void run(){
-		// Declaracion de todas las variables a usar en el programa
-		int CantRondas, NumParticipantes, NumRondas;		
+    private AtlasPuntuaciones(){
+        escaner = new Scanner(System.in);
+    }
 
-		// Notificacion al usuario de la solicitud de dato
-		System.out.println("¿Cuantos participantes van a jugar? (Max 10)");
-		NumParticipantes = escaner.nextInt();
-		int[] PuntParticipantes = new int[NumParticipantes];
-		escaner.nextLine();
+    public void run(){
+        // Declaracion de variables
+        int numParticipantes, numRondas;
 
-		System.out.println("¿Cuantas rondas van a jugar? (Max 5)");
-		NumRondas = escaner.nextInt();
-		escaner.nextLine();
-
-		for(int i = 0; i < NumParticipantes; i++) {
-            for(int o = 0; o < NumRondas; o++) {
-            	System.out.println("Puntaje del " + i + "  jugador en la " + o + " ronda: ");
-            	PuntParticipantes[o] = escaner.nextInt();
-        	}
+        // Solicitud de datos al usuario
+        System.out.print("Cuantos participantes van a jugar? (Max 10): ");
+        numParticipantes = escaner.nextInt();
+        while (numParticipantes < 1 || numParticipantes > 10){
+            System.out.print("Numero invalido, recuerde que es un maximo 10 jugadores: ");
+            numParticipantes = escaner.nextInt();
         }
 
-		int Total = 0;
-		for(int i = 0; i < PuntParticipantes.length; i++) {
-            PuntParticipantes[i] += Total;
-			System.out.println("El total del jugador " + i + " es: " + Total);
-    	}
-		CantRondas = 0;
-		double promedio = 0.0;
-		for(int i = 0; i < PuntParticipantes.length; i++) {
-            PuntParticipantes[i] /= CantRondas;
-			System.out.println("El Promedio del jugador " + i + " es: " + promedio);
+        System.out.print("Cuantas rondas van a jugar? (Max 5): ");
+        numRondas = escaner.nextInt();
+        while (numRondas < 1 || numRondas > 5){
+            System.out.print("Numero invalido, recuerde que es un maximo de 5 rondas: ");
+            numRondas = escaner.nextInt();
+        }
 
-		}
+        int[][] puntajes = new int[numParticipantes][numRondas];
 
-		// Realizamos los cálculos delegandolos a los métodos
+        for (int i = 0; i < numParticipantes; i++){
+            for (int j = 0; j < numRondas; j++){
+                System.out.print("Puntaje del jugador " + (i + 1) + " en la ronda " + (j + 1) + ": ");
+                puntajes[i][j] = escaner.nextInt();
+            }
+        }
 
+        int[] totalPuntajes = calcularTotales(puntajes, numRondas);
+        mostrarResultados(totalPuntajes, numRondas);
+    }
 
+    public int[] calcularTotales(int[][] puntajes, int numRondas){
+        int[] totalPuntajes = new int[puntajes.length];
+        for (int i = 0; i < puntajes.length; i++){
+            for (int j = 0; j < numRondas; j++){
+                totalPuntajes[i] += puntajes[i][j];
+            }
+        }
+        return totalPuntajes;
+    }
 
-		// Notificación al usuario de los resultados
-	
-	}
+    private void mostrarResultados(int[] totalPuntajes, int numRondas){
+        System.out.println("Resultados finales:");
+        for (int i = 0; i < totalPuntajes.length; i++){
+            double promedio = (double) totalPuntajes[i] / numRondas;
+            System.out.println("El jugador numero " + (i + 1) + " tiene un total de " + totalPuntajes[i] + " puntos y un promedio de " + promedio);
+        }
+    }
 
-
-	
-
-	public static void main(String[] args) {
-		AtlasPuntuaciones mainApp = new AtlasPuntuaciones();
-		mainApp.run();
-	}
+    public static void main(String[] args){
+        AtlasPuntuaciones mainApp = new AtlasPuntuaciones();
+        mainApp.run();
+    }
 }
